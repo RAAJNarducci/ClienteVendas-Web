@@ -24,7 +24,7 @@
   </form>
 
   <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let client of clients | paginate: { id: 'server', itemsPerPage: 10, currentPage: pagination.pagina, totalItems: pagination.totalItems }">
+    <a (click)="openModal(content,client.id) " class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let client of clients | paginate: { id: 'server', itemsPerPage: 10, currentPage: pagination.pagina, totalItems: pagination.totalItems }">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">{{client.nome}}</h5>
       </div>
@@ -43,3 +43,29 @@
     </div>
   </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header bg-light">
+    <h4 class="modal-title">Compras</h4>
+  </div>
+  <div class="modal-body">
+    <table class="table">
+      <thead class="thead-light">
+        <tr class="text-center">
+          <th scope="col">Data da Compra</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Valor - Produto</th>
+          <th scope="col">Qtd.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-center" *ngFor="let sale of sales">
+          <td>{{sale.dataVendaFormatada}}</td>
+          <td>{{sale.produto.descricao}}</td>
+          <td>{{sale.produto.valorFormatado}}</td>
+          <td>{{sale.quantidade}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>

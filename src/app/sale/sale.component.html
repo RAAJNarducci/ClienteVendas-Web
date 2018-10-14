@@ -1,3 +1,30 @@
-<p>
-  sale works!
-</p>
+<div class="col-md-12">
+  <form [formGroup]="searchForm">
+    <div class="row form-group">
+      <div class="col-md-6">
+        <label for="nome">Data Inicio</label>
+        <input type="date" max="2999-12-31" formControlName="dataInicio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dataInicio.errors }" />
+      </div>
+      <div class="col-md-6">
+        <label for="nome">Data Fim</label>
+        <input type="date" max="2999-12-31" formControlName="dataFim" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dataFim.errors }" />
+      </div>
+    </div>
+    <div class="form-group">
+      <button (click)="findSales();" class="btn btn-outline-primary btn-lg">Buscar</button>&nbsp;
+      <button type="reset" class="btn btn-outline-danger btn-lg">Limpar</button>
+    </div>
+  </form>
+</div>
+
+<div *ngFor="let chart of charts">
+  <google-chart style="width: 100%"
+    [title]="chart.title"
+    [type]="chart.type"
+    [data]="chart.data"
+    [columnNames]="chart.columnNames"
+    [roles]="chart.roles"
+    [options]="chart.options"
+    >
+  </google-chart>
+</div>
